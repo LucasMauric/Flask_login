@@ -36,6 +36,13 @@
             <li role="presentation" class="active"><a href="#">Home</a></li>
             <li role="presentation"><a href="#">About</a></li>
             <li role="presentation"><a href="#">Contact</a></li>
+            {%if current_user.is_authenticated%}
+            <li role="presentation"><a href="#"">{{current_user}}</a></li>
+            <li role="presentation"><a href="{{url_for('logout')}}">Sair</a></li>
+            {%else%}
+            <li role="presentation"><a href="/login">Login</a></li>
+            <li role="presentation"><a href="/cadastro">Cadastro</a></li>
+            {%endif%}
           </ul>
         </nav>
         <h3 class="text-muted">Project name</h3>

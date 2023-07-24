@@ -37,10 +37,18 @@
             </label>
         </div>
         <button type="submit">Enviar</button>
-
+        {%with messages = get_flashed_messages() %}
+        {%if messages%}
+        <ul>
+            {%for message in messages%}
+            <li>{{message|safe}}</li>
+            {%endfor%}
+        </ul>
+        
+        {%endif%}
+        {%endwith%}
     </form>
     
-
 
 
 

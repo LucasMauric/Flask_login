@@ -1,6 +1,7 @@
 from app import db
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(db.Model,UserMixin):
     __tablename__= "users"
 
     id = db.Column(db.Integer, primary_key = True)
@@ -23,7 +24,7 @@ class Post(db.Model):
     __tablename__ = "posts"
     id = db.Column(db.Integer, primary_key = True)
     content = db.Column(db.Text)
-    user_id = db.Column(db.Integer,db.ForeignKey('users_id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     user = db.relationship('User',foreign_keys=user_id)
     
     def __init__(self,content,user_id):
@@ -39,8 +40,8 @@ class Post(db.Model):
 class Follow(db.Model):
     __tablename__ = "follows"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.foreignKey('users_id'))
-    follower_id = db.Column(db.Integer, db.foreignKey('users_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     user = db.relationship('User', foreign_keys=user_id)
     follower = db.relationship('User', foreign_keys=follower_id)
